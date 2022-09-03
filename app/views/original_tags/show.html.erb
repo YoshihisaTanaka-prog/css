@@ -1,0 +1,19 @@
+<p style="color: green"><%= notice %></p>
+
+<%= @original_tag.product.user.uid %> - <%= @original_tag.product.name %>
+
+<%= render @original_tag %>
+
+<div>
+  <%= link_to "Edit this original tag", edit_original_tag_path(@original_tag) %> |
+  <%= link_to "Back to original tags", original_tags_path %>
+
+  <%= button_to "Destroy this original tag", @original_tag, method: :delete %>
+</div>
+
+<p>
+<% @original_tag.values.each do |value| %>
+  <%= value.title.name %>: <%= value.value %>;<%= link_to "編集", edit_value_path(value) %><br>
+<% end %>
+</p>
+<%= link_to "追加", new_value_path %>

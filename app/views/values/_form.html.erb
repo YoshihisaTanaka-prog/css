@@ -1,0 +1,37 @@
+<%= form_with(model: value) do |form| %>
+  <% if value.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(value.errors.count, "error") %> prohibited this value from being saved:</h2>
+
+      <ul>
+        <% value.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :original_tag_id, value: session[:original_tag_id] %>
+
+  <div>
+    <%= form.label :title_id, style: "display: block" %>
+    <% selections = [] %>
+    <% Title.all.order(:name).each do |title| %>
+      <% selections.push([title.name, title.id]) %>
+    <% end %>
+    <% selected_title_id = 0 %>
+    <% if value.title_id %>
+      <% selected_title_id = value.title_id %>
+    <% end %>
+    <%= form.select :title_id, selections, { include_blank: true, selected: selected_title_id } %>
+  </div>
+
+  <div>
+    <%= form.label :value, style: "display: block" %>
+    <%= form.text_field :value %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

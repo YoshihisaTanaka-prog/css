@@ -1,0 +1,2 @@
+class OpUnit < ApplicationRecord
+end

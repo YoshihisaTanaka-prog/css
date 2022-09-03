@@ -1,0 +1,51 @@
+<%= include_gon %>
+
+<%= link_to "基本タグ", normal_tags_path %><br>
+<%= link_to "CSSのカテゴリー", categories_path %><br>
+<%= link_to "CSSの設定タイトル", titles_path %><br>
+<%= link_to "操作方法", operations_path %><br>
+<%= link_to "単位", units_path %><br>
+<%= link_to "ユーザ", users_path %><br><br>
+<%= link_to "Sign in", new_admin_session_url %><br>
+<%= link_to "Sign Up", new_admin_registration_url %><br><br>
+<%= link_to "Download xlsx", root_path(format: :xlsx) %><br>
+<%= link_to "Watch JSON", root_path(format: :json) %><br>
+<a onclick='downloadSeedsRb()'>Download seeds.rb</a> 
+
+<script type="text/javascript">
+function downloadSeedsRb(){
+    var outputData = {}
+    for(let key in gon.data){
+        if (gon.data[key].length != 0) {
+            let data = gon.data[key];
+            console.log(key, data);
+            outputData[key] = [];
+            for (let row of data) {
+                let rowData = {}
+                for (const key2 in row) {
+                    if ( !( ["created_at", "updated_at"].includes(key2) ) ){
+                        rowData[key2] = row[key2];
+                    }
+                }
+                outputData[key].push(rowData);
+            }
+        }
+    }
+    var outputtext = "";
+    var i = 0;
+    for (const key in outputData) {
+        if (i == 0) {
+            outputtext += (key + ".create(" + JSON.stringify(outputData[key]) + ")");
+        } else {
+            outputtext += ("\n" + key + ".create(" + JSON.stringify(outputData[key]) + ")");
+        }
+        i += 1;
+    }
+    const blob = new Blob([outputtext], {type: "text/plain"});
+    const aTag = document.createElement('a');
+    aTag.href = URL.createObjectURL(blob);
+    aTag.download = "seeds.rb";
+    aTag.click();
+    URL.revokeObjectURL(aTag.href);
+}
+</script>

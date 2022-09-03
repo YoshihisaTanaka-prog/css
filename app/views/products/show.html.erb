@@ -1,0 +1,18 @@
+<p style="color: green"><%= notice %></p>
+
+<p>
+<%= @product.name %><br>
+<%= @product.user.uid %>
+</p>
+
+<div>
+  <%= link_to "Edit this product", edit_product_path(@product) %> |
+  <%= link_to "Back to products", products_path %>
+
+  <%= button_to "Destroy this product", @product, method: :delete %>
+</div>
+
+<% @product.original_tags.each do |tag| %>
+  <p><%= link_to tag.name, tag %></p>
+<% end %>
+<%= link_to "Add Tag", new_original_tag_path %>

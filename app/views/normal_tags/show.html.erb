@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @normal_tag %>
+
+<div>
+  <%= link_to "Edit this normal tag", edit_normal_tag_path(@normal_tag) %> |
+  <%= link_to "Back to normal tags", normal_tags_path %>
+
+  <%= button_to "Destroy this normal tag", @normal_tag, method: :delete %>
+</div>

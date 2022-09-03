@@ -1,0 +1,2 @@
+class CategoryTitle < ApplicationRecord
+end

@@ -1,0 +1,22 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Titles</h1>
+
+<table>
+  <tr><th>Title</th><th>Operation</th><th colspan=2></th></tr>
+  <% @titles.each do |title| %>
+    <tr>
+      <td>
+        <%= title.name %>
+      </td>
+      <td>
+        <%= title.operation.name unless title.operation.blank? %>
+      </td>
+      <td>
+        <%= link_to "Show", title %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to "New title", new_title_path %>

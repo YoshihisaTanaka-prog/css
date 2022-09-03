@@ -1,0 +1,19 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Units</h1>
+
+<table>
+  <tr><th>UnitName</th><th></th></tr>
+  <% @units.each do |unit| %>
+    <tr>
+      <td>
+        <%= unit.name %>
+      </td>
+      <td>
+        <%= link_to "Show", unit %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to "New unit", new_unit_path %>

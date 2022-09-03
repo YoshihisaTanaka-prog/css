@@ -1,0 +1,24 @@
+<%= form_with(model: original_tag) do |form| %>
+  <% if original_tag.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(original_tag.errors.count, "error") %> prohibited this original_tag from being saved:</h2>
+
+      <ul>
+        <% original_tag.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :product_id, value: session[:product_id] %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,19 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Normal tags</h1>
+
+<table>
+  <tr><th>TagName</th><th></th></tr>
+  <% @normal_tags.each do |normal_tag| %>
+    <tr>
+      <td>
+        <%= normal_tag.name %>
+      </td>
+      <td>
+        <%= link_to "Show", normal_tag %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to "New normal tag", new_normal_tag_path %>

@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @user %>
+
+<div>
+  <%= link_to "Edit this user", edit_user_path(@user) %> |
+  <%= link_to "Back to users", users_path %>
+
+  <%= button_to "Destroy this user", @user, method: :delete %>
+</div>
+
+<% @user.products.each do |product| %>
+  <p><%= link_to product.name, product %></p>
+<% end %>
+<p><%= link_to "New Product", new_product_path %></p>

@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Original tags</h1>
+
+<%= @product.user.uid %> - <%= @product.name %>
+
+<div id="original_tags">
+  <% @original_tags.each do |original_tag| %>
+    <%= render original_tag %>
+    <p>
+      <%= link_to "Show this original tag", original_tag %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New original tag", new_original_tag_path %>

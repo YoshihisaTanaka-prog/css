@@ -1,0 +1,26 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Operations</h1>
+
+<table>
+    <% @operations.each do |operation| %>
+    <tr>
+      <td colspan="2">
+        <%= operation.name %>
+      </td>
+      <td>
+        <%= link_to "Show", operation %>
+      </td>
+      <td>
+        <%= link_to "Add Unit", new_unit_path(operation_id:  operation.id) %>
+      </td>
+    </tr>
+    <% operation.units.each do |unit| %>
+      <tr>
+        <td>&nbsp;</td><td><%= link_to unit.name, edit_unit_path(unit.id) %></td><td></td><td></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+
+<%= link_to "New operation", new_operation_path %>

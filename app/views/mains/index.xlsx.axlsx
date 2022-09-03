@@ -1,0 +1,17 @@
+wb = xlsx_package.workbook
+@data.each do |key, table|
+    wb.add_worksheet(name: key) do |sheet|
+        array = []
+        table.column_names.each do |column|
+            array.push(column) unless ["created_at", "updated_at"].include?(column)
+        end
+        sheet.add_row array
+        table.all.order(:id).each do |row|
+            array = []
+            table.column_names.each do |column|
+                array.push(row[column]) unless ["created_at", "updated_at"].include?(column)
+            end
+            sheet.add_row array
+        end
+    end
+end

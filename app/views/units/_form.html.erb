@@ -1,0 +1,32 @@
+<%= form_with(model: unit) do |form| %>
+  <% if unit.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(unit.errors.count, "error") %> prohibited this unit from being saved:</h2>
+
+      <ul>
+        <% unit.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <%= form.label :operation, style: "display: block" %>
+    <% Operation.all.order(:name).each do |operation| %>
+      <% if params[:operation_id] %>
+        <p><input type="checkbox" name="operations[]", value="<%= operation.id %>"<%= " checked" if operation.id.to_s == params[:operation_id] %>><%= operation.name %></p>
+      <% else %>
+        <p><input type="checkbox" name="operations[]", value="<%= operation.id %>"<%= " checked" if unit.operation_id_list.include?(operation.id) %>><%= operation.name %></p>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
