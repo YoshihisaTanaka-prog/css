@@ -25,6 +25,12 @@ class MainsController < ApplicationController
         Category.all.each do |category|
             categories_hash[category.id] = category.hash
         end
-        render :json => {user: User.find_by(uid: params[:uid]).hash, normalTags: normal_tags_hash, titles: titles_hash, categories: categories_hash}
+        user = User.find_by(uid: params[:uid])
+        unless user
+            user = User.new
+            user.uid = params[:uid]
+            user.save
+        end
+        render :json => user.hash
     end
 end
