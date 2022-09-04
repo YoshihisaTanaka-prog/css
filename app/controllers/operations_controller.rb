@@ -36,6 +36,7 @@ class OperationsController < ApplicationController
 
   # PATCH/PUT /operations/1 or /operations/1.json
   def update
+    logger.debug operation_params
     respond_to do |format|
       if @operation.update(operation_params)
         format.html { redirect_to operation_url(@operation), notice: "Operation was successfully updated." }

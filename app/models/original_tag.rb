@@ -16,14 +16,14 @@ class OriginalTag < ApplicationRecord
         return OriginalTag.where(parent_id: self.id)
     end
 
-    def hash
+    def hash_format
         values_hash = {}
         self.values.each do |value|
-            values_hash[value.id] = value.hash
+            values_hash[value.id] = value.hash_format
         end
         children_hash = {}
         self.children.each do |child|
-            children_hash[child.id] = child.hash
+            children_hash[child.id] = child.hash_format
         end
         return {name: self.name, children: children_hash, values: values_hash}
     end

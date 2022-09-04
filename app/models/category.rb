@@ -8,7 +8,7 @@ class Category < ApplicationRecord
         return ret
     end
 
-    def hash
+    def hash_format
         return {name: self.name, titles: self.title_ids}
     end
 

@@ -4,8 +4,8 @@ class Title < ApplicationRecord
         return Operation.find_by(id: self.operation_id)
     end
 
-    def hash
-        return {name: self.name, operation: self.operation.hash}
+    def hash_format
+        return {name: self.name, operation: self.operation.hash_format}
     end
 
     def categories
@@ -40,8 +40,10 @@ class Title < ApplicationRecord
     def set_ct ct_list
         
         selected_list = []
-        ct_list.each do |ct|
-            selected_list.push(ct.to_i)
+        if ct_list
+            ct_list.each do |ct|
+                selected_list.push(ct.to_i)
+            end
         end
         
         all_list = []

@@ -1,5 +1,5 @@
 class NormalTag < ApplicationRecord
-    def hash
+    def hash_format
         return {name: self.name}
     end
 end

@@ -1,6 +1,6 @@
 class Unit < ApplicationRecord
 
-    def hash
+    def hash_format
         return {name: self.name}
     end
 

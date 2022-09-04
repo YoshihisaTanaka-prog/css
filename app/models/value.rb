@@ -3,7 +3,7 @@ class Value < ApplicationRecord
         return Title.find_by(id: self.title_id)
     end
 
-    def hash
+    def hash_format
         return {title: self.title.name, value: self.value}
     end
 end
