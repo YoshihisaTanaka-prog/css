@@ -1,4 +1,5 @@
 class MainsController < ApplicationController
+    protect_from_forgery except: [:data]
 
     def index
         respond_to do |format|
