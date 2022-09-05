@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
 
   # POST /products or /products.json
   def create
-    text_product_params = params[:product].split('{')[1],split('}')[0]
+    text_product_params = params[:product].split('{')[1].split('}')[0]
     hash_product_params = {}
     text_product_params.split(',').each do |element|
       list = element.split('=')
