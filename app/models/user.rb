@@ -9,7 +9,7 @@ class User < ApplicationRecord
         self.products.each do |product|
             products_hash[product.id] = product.hash_format
         end
-        return {products: products_hash}
+        return {products: products_hash, userId: self.id}
     end
 
 end
