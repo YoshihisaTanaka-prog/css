@@ -1,7 +1,7 @@
 class MainsController < ApplicationController
     protect_from_forgery except: [:data]
     before_action :only_api, only: [:data]
-    before_action :authenticate, only: [:index]
+    before_action :authenticate_admin, only: [:index]
 
     def index
         respond_to do |format|
