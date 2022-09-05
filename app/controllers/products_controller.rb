@@ -24,8 +24,8 @@ class ProductsController < ApplicationController
 
   # POST /products or /products.json
   def create
-    @product = Product.new(product_params)
-    @product.user_id = session[:user_id]
+    json_product_params = JSON.parse(params[:product])
+    @product = Product.new(json_product_params)
 
     respond_to do |format|
       if @product.save
