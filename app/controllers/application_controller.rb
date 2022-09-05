@@ -26,7 +26,12 @@ class ApplicationController < ActionController::Base
         hash_params = {}
         text_params.split(', ').each do |element|
           list = element.split('=')
-          hash_params[list[0].to_sym] = list[1]
+          if list[0] == 'uid'
+            user = User.find_by(uid: list[1])
+            hash_params[:user_id] = user.id
+          else
+            hash_params[list[0].to_sym] = list[1]
+          end
         end
         return hash_params
     end
