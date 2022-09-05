@@ -24,18 +24,12 @@ class ProductsController < ApplicationController
 
   # POST /products or /products.json
   def create
-    text_product_params = params[:product].split('{')[1].split('}')[0]
-    hash_product_params = {}
-    text_product_params.split(', ').each do |element|
-      list = element.split('=')
-      hash_product_params[list[0].to_sym] = list[1]
-    end
-    @product = Product.new(hash_product_params)
+    @product = Product.new(hashed_params params[:product])
 
     respond_to do |format|
       if @product.save
         format.html { redirect_to product_url(@product), notice: "Product was successfully created." }
-        format.json { render :show, status: :created, location: @product }
+        format.json { render json: @product.hash_format }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @product.errors, status: :unprocessable_entity }

@@ -21,6 +21,16 @@ class ApplicationController < ActionController::Base
         end
     end
 
+    def hashed_params text
+        text_params = text.split('{')[1].split('}')[0]
+        hash_params = {}
+        text_params.split(', ').each do |element|
+          list = element.split('=')
+          hash_params[list[0].to_sym] = list[1]
+        end
+        return hash_params
+    end
+
     def after_sign_in_path_for(resource)
         root_path # ログイン後に遷移するpathを設定
     end
