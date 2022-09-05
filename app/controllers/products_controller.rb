@@ -26,9 +26,9 @@ class ProductsController < ApplicationController
   def create
     text_product_params = params[:product].split('{')[1].split('}')[0]
     hash_product_params = {}
-    text_product_params.split(',').each do |element|
+    text_product_params.split(', ').each do |element|
       list = element.split('=')
-      hash_product_params[list[0]] = list[1]
+      hash_product_params[list[0].to_sym] = list[1]
     end
     @product = Product.new(hash_product_params)
 
