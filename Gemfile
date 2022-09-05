@@ -32,6 +32,7 @@ gem 'caxlsx_rails'
 gem 'gon'
 gem 'devise'
 gem 'dotenv-rails'
+gem 'rack-cors'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
