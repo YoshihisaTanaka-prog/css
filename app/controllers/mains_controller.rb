@@ -1,5 +1,7 @@
 class MainsController < ApplicationController
     protect_from_forgery except: [:data]
+    before_action :only_api, only: [:data]
+    before_action :authenticate, only: [:index]
 
     def index
         respond_to do |format|
@@ -9,9 +11,6 @@ class MainsController < ApplicationController
         format.xlsx do
             response.headers['Content-Disposition'] = 'attachment; filename="cssSiteData.xlsx"'
             @data = {"Admin" => Admin, "Normal Tag" => NormalTag, "Operation" => Operation, "Original Tag" => OriginalTag, "Products" => Product, "Titles" => Title, "Units" => Unit, "Values" => Value}
-        end
-        format.json do
-            render json: {}
         end
       end
     end
@@ -25,5 +24,9 @@ class MainsController < ApplicationController
             user.save
         end
         render :json => user.hash_format
+    end
+
+    def dummy
+        render plain: ""
     end
 end

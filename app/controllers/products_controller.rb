@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
+  protect_from_forgery except: [:create, :update, :destroy]
+  before_action :only_api, only: [:create, :update, :destroy]
 
   # GET /products or /products.json
   def index
