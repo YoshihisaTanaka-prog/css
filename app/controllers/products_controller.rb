@@ -24,19 +24,31 @@ class ProductsController < ApplicationController
 
   # POST /products or /products.json
   def create
-    @product = Product.new(hashed_params params[:product])
+    @product = Product.new(product_params)
 
-    respond_to do |format|
-      if @product.save
-        format.html { redirect_to product_url(@product), notice: "Product was successfully created." }
+    test_product = Product.find_by(name: @product.name, user_id: @product.user_id)
+    if test_product
+      respond_to do |format|
+        format.html { redirect_to product_url(test_product), notice: "Product has already been created." }
         format.json { 
           data = {}
-          data[@product.id] = @product.hash_format
+          data[test_product.id] = test_product.hash_format
           render json: data
         }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
+      end
+    else
+      respond_to do |format|
+        if @product.save
+          format.html { redirect_to product_url(@product), notice: "Product was successfully created." }
+          format.json { 
+            data = {}
+            data[@product.id] = @product.hash_format
+            render json: data
+          }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @product.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -76,6 +88,13 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:name, :user_id)
+      logger.debug params[:product]
+      if params[:product].class == String then
+        dummy_param = {}
+        dummy_param[:product] = hash_params params[:product]
+        return dummy_param.require(:product).permit(:name, :user_id)
+      else
+        return params.require(:product).permit(:name, :user_id)
+      end
     end
 end

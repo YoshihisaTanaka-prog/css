@@ -3,7 +3,7 @@ class NormalTagsController < ApplicationController
 
   # GET /normal_tags or /normal_tags.json
   def index
-    @normal_tags = NormalTag.all
+    @normal_tags = NormalTag.all.order(:name)
   end
 
   # GET /normal_tags/1 or /normal_tags/1.json

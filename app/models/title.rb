@@ -1,4 +1,6 @@
 class Title < ApplicationRecord
+    
+    validates :name, uniqueness: true
 
     def operation
         return Operation.find_by(id: self.operation_id)
