@@ -92,7 +92,7 @@ class ProductsController < ApplicationController
       if params[:product].class == String then
         dummy_param = {}
         params[:product] = hashed_params params[:product]
-        return dummy_param.require(:product).permit(:name, :user_id)
+        return params.require(:product).permit(:name, :user_id)
       else
         return params.require(:product).permit(:name, :user_id)
       end
