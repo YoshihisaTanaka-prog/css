@@ -68,6 +68,12 @@ class TitlesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def title_params
-      params.require(:title).permit(:name, :operation_id)
+      if params[:title].class == String then
+        dummy_param = {}
+        params[:title] = hashed_params params[:title].
+        return params.require(:title).permit(:name, :operation_id)
+      else
+        return params.require(:title).permit(:name, :operation_id)
+      end
     end
 end
