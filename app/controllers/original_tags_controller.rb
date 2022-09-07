@@ -34,7 +34,7 @@ class OriginalTagsController < ApplicationController
         parent_name = parent_name + name_list[i]
       end
       logger.debug parent_name
-      parent = OriginalTag.find_by(name: parent_name)
+      parent = OriginalTag.find_by(name: parent_name, product_id: @original_tag.product_id)
       if parent
         @original_tag.parent_id = parent.id
       end
