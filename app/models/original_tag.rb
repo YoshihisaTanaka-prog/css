@@ -25,7 +25,7 @@ class OriginalTag < ApplicationRecord
         self.children.each do |child|
             children_hash.push(child.id)
         end
-        return {name: self.name, children: children_hash, values: values_hash}
+        return {name: self.name, parentId: self.parent_id, children: children_hash, values: values_hash}
     end
 
 end
