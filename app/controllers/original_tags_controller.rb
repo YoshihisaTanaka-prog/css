@@ -26,31 +26,44 @@ class OriginalTagsController < ApplicationController
   def create
     @original_tag = OriginalTag.new(original_tag_params)
 
-    name_list = original_tag_params[:name].split(' ')
-    if name_list.length > 1
-      logger.debug name_list
-      parent_name = ""
-      for i in 0..(name_list.length - 2)
-        parent_name = parent_name + name_list[i]
-      end
-      logger.debug parent_name
-      parent = OriginalTag.find_by(name: parent_name, product_id: @original_tag.product_id)
-      if parent
-        @original_tag.parent_id = parent.id
-      end
-    end
-
-    respond_to do |format|
-      if @original_tag.save
-        format.html { redirect_to original_tag_url(@original_tag), notice: "Original tag was successfully created." }
+    test = OriginalTag.find_by(name: @original_tag.name, product_id: @original_tag.product_id)
+    if test
+      respond_to do |format|
+        format.html { redirect_to original_tag_url(test), notice: "Original tag was successfully created." }
         format.json { 
           data = {}
-          data[@original_tag.id] = @original_tag.hash_format
+          data[test.id] = test.hash_format
           render json: data
         }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @original_tag.errors, status: :unprocessable_entity }
+      end
+    else
+
+      name_list = original_tag_params[:name].split(' ')
+      if name_list.length > 1
+        logger.debug name_list
+        parent_name = ""
+        for i in 0..(name_list.length - 2)
+          parent_name = parent_name + name_list[i]
+        end
+        logger.debug parent_name
+        parent = OriginalTag.find_by(name: parent_name, product_id: @original_tag.product_id)
+        if parent
+          @original_tag.parent_id = parent.id
+        end
+      end
+
+      respond_to do |format|
+        if @original_tag.save
+          format.html { redirect_to original_tag_url(@original_tag), notice: "Original tag was successfully created." }
+          format.json { 
+            data = {}
+            data[@original_tag.id] = @original_tag.hash_format
+            render json: data
+          }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @original_tag.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
