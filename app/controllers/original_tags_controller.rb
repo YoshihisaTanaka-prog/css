@@ -1,5 +1,7 @@
 class OriginalTagsController < ApplicationController
   before_action :set_original_tag, only: %i[ show edit update destroy ]
+  protect_from_forgery except: [:create, :update, :destroy]
+  before_action -> {only_admin_or_api 10}, only: [:create, :update, :destroy]
 
   # GET /original_tags or /original_tags.json
   def index
@@ -86,6 +88,12 @@ class OriginalTagsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def original_tag_params
-      params.require(:original_tag).permit(:product_id, :name, :parent_id)
+      if params[:original_tag].class == String then
+        dummy_param = {}
+        params[:original_tag] = hashed_params params[:original_tag]
+        return params.require(:original_tag).permit(:product_id, :name, :parent_id)
+      else
+        return params.require(:original_tag).permit(:product_id, :name, :parent_id)
+      end
     end
 end

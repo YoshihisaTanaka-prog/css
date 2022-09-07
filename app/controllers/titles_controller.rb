@@ -1,7 +1,5 @@
 class TitlesController < ApplicationController
   before_action :set_title, only: %i[ show edit update destroy ]
-  protect_from_forgery except: [:create, :update, :destroy]
-  before_action -> {only_admin_or_api 10}, only: [:create, :update, :destroy]
   after_action :fetch_main_cache_data, only: [:create, :update, :destroy]
 
   # GET /titles or /titles.json
