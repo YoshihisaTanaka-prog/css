@@ -21,9 +21,9 @@ class OriginalTag < ApplicationRecord
         self.values.each do |value|
             values_hash[value.id] = value.hash_format
         end
-        children_hash = {}
+        children_hash = []
         self.children.each do |child|
-            children_hash[child.id] = child.hash_format
+            children_hash.push(child.id)
         end
         return {name: self.name, children: children_hash, values: values_hash}
     end
