@@ -28,4 +28,11 @@ class OriginalTag < ApplicationRecord
         return {name: self.name, parentId: self.parent_id, children: children_hash, values: values_hash}
     end
 
+    def delete
+        self.children.each do |child|
+            child.delete
+        end
+        self.destroy
+    end
+
 end
