@@ -3,8 +3,8 @@
 <h1>Normal tags</h1>
 
 <table>
-  <tr><th>TagName</th><th></th></tr>
-  <% @normal_tags.each do |normal_tag| %>
+  <tr><th>TagName</th><th></th><th></th></tr>
+  <% @normal_tags.each_with_index do |normal_tag, index| %>
     <tr>
       <td>
         <%= normal_tag.name %>
@@ -12,8 +12,13 @@
       <td>
         <%= link_to "Show", normal_tag %>
       </td>
+      <% if index % 5 == 0 %>
+        <td><%= link_to "New normal tag", new_normal_tag_path %></td>
+      <% else %>
+        <td>
+      <% end %>
     </tr>
   <% end %>
 </table>
 
-<%= link_to "New normal tag", new_normal_tag_path %>
+

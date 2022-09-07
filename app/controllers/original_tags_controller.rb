@@ -43,7 +43,7 @@ class OriginalTagsController < ApplicationController
     respond_to do |format|
       if @original_tag.save
         format.html { redirect_to original_tag_url(@original_tag), notice: "Original tag was successfully created." }
-        format.json { render :show, status: :created, location: @original_tag }
+        format.json { render json:, @original_tag.hash_format }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @original_tag.errors, status: :unprocessable_entity }
@@ -61,7 +61,7 @@ class OriginalTagsController < ApplicationController
         @original_tag.parent_id = kept_parent_id
         @original_tag.save
         format.html { redirect_to original_tag_url(@original_tag), notice: "Original tag was successfully updated." }
-        format.json { render :show, status: :ok, location: @original_tag }
+        format.json { render json:, @original_tag.hash_format }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @original_tag.errors, status: :unprocessable_entity }
