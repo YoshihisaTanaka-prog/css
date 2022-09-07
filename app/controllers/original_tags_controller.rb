@@ -45,7 +45,7 @@ class OriginalTagsController < ApplicationController
         format.html { redirect_to original_tag_url(@original_tag), notice: "Original tag was successfully created." }
         format.json { 
           data = {}
-          data[:original_tag.id] = @original_tag.hash_format
+          data[original_tag.id] = @original_tag.hash_format
           render json: data
         }
       else
@@ -67,7 +67,7 @@ class OriginalTagsController < ApplicationController
         format.html { redirect_to original_tag_url(@original_tag), notice: "Original tag was successfully updated." }
         format.json {
           data = {}
-          data[:original_tag.id] = @original_tag.hash_format
+          data[original_tag.id] = @original_tag.hash_format
           render json: data
         }
       else
