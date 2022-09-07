@@ -79,11 +79,12 @@ class OriginalTagsController < ApplicationController
 
   # DELETE /original_tags/1 or /original_tags/1.json
   def destroy
+    id = @original_tag.id
     @original_tag.destroy
 
     respond_to do |format|
       format.html { redirect_to original_tags_url, notice: "Original tag was successfully destroyed." }
-      format.json { head :no_content }
+      format.json { render json: id }
     end
   end
 
