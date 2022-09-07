@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: %i[ show edit update destroy ]
+  after_action :fetch_main_cache_data, only: [:create, :update, :destroy]
 
   # GET /categories or /categories.json
   def index

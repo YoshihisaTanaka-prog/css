@@ -1,5 +1,6 @@
 class NormalTagsController < ApplicationController
   before_action :set_normal_tag, only: %i[ show edit update destroy ]
+  after_action :fetch_main_cache_data, only: [:create, :update, :destroy]
 
   # GET /normal_tags or /normal_tags.json
   def index

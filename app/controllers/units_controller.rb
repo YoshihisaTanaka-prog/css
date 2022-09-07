@@ -1,5 +1,6 @@
 class UnitsController < ApplicationController
   before_action :set_unit, only: %i[ show edit update destroy ]
+  after_action :fetch_main_cache_data, only: [:create, :update, :destroy]
 
   # GET /units or /units.json
   def index

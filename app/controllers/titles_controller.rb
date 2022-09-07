@@ -1,5 +1,6 @@
 class TitlesController < ApplicationController
   before_action :set_title, only: %i[ show edit update destroy ]
+  after_action :fetch_main_cache_data, only: [:create, :update, :destroy]
 
   # GET /titles or /titles.json
   def index
