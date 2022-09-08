@@ -91,7 +91,6 @@ class ValuesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def value_params
       if params[:value].class == String then
-        dummy_param = {}
         params[:value] = hashed_params params[:value].
         return params.require(:value).permit(:original_tag_id, :title_id, :value)
       else
