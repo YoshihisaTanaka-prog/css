@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
         Title.all.order(:name).each do |title|
             if title.operation
                 data = title.operation.hash_format
-                data[:name] = title.titleName
+                data[:titleName] = title.name
                 update_data[:titles].push({title.id => data})
             end
         end
