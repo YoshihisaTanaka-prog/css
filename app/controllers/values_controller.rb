@@ -28,7 +28,8 @@ class ValuesController < ApplicationController
       respond_to do |format|
         format.html { redirect_to value_url(test), notice: "Value was successfully created." }
         format.json {
-          data = {test.id: test.hash_format}
+          data = {}
+          data[test.id] = test.hash_format
           render json: data
         }
       end
@@ -37,7 +38,8 @@ class ValuesController < ApplicationController
         if @value.save
           format.html { redirect_to value_url(@value), notice: "Value was successfully created." }
           format.json {
-            data = {@value.id: @value.hash_format}
+            data = {}
+            data[@value.id] = @value.hash_format
             render json: data
           }
         else
@@ -57,7 +59,8 @@ class ValuesController < ApplicationController
         @value.save
         format.html { redirect_to value_url(@value), notice: "Value was successfully updated." }
         format.json {
-          data = {@value.id: @value.hash_format}
+          data = {}
+          data[@value.id] = @value.hash_format
           render json: data
         }
       else
