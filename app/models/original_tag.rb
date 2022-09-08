@@ -21,11 +21,7 @@ class OriginalTag < ApplicationRecord
         self.values.each do |value|
             values_hash[value.id] = value.hash_format
         end
-        children_hash = []
-        self.children.each do |child|
-            children_hash.push(child.id)
-        end
-        return {name: self.name, parentId: self.parent_id, children: children_hash, values: values_hash}
+        return {name: self.name, parentId: self.parent_id, values: values_hash}
     end
 
     def delete

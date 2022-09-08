@@ -56,7 +56,11 @@ class ApplicationController < ActionController::Base
 
         update_data[:titles] = []
         Title.all.order(:name).each do |title|
-            update_data[:titles].push({title.name => title.operation.hash_format}) if title.operation
+            if title.operation
+                data = title.operation.hash_format
+                data[:name] = title.name
+                update_data[:titles].push({title.id => data})
+            end
         end
 
         logger.debug update_data
