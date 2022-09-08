@@ -22,14 +22,28 @@ class ValuesController < ApplicationController
   # POST /values or /values.json
   def create
     @value = Value.new(value_params)
+    test = Value.find_by(original_tag_id: @value.original_tag_id, title_id: @value.title_id)
 
-    respond_to do |format|
-      if @value.save
-        format.html { redirect_to value_url(@value), notice: "Value was successfully created." }
-        format.json { render :show, status: :created, location: @value }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @value.errors, status: :unprocessable_entity }
+    if test
+      respond_to do |format|
+        format.html { redirect_to value_url(test), notice: "Value was successfully created." }
+        format.json {
+          data = {test.id: test.hash_format}
+          render json: data
+        }
+      end
+    else
+      respond_to do |format|
+        if @value.save
+          format.html { redirect_to value_url(@value), notice: "Value was successfully created." }
+          format.json {
+            data = {@value.id: @value.hash_format}
+            render json: data
+          }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @value.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -42,7 +56,10 @@ class ValuesController < ApplicationController
         @value.original_tag_id = kept_original_tag_id
         @value.save
         format.html { redirect_to value_url(@value), notice: "Value was successfully updated." }
-        format.json { render :show, status: :ok, location: @value }
+        format.json {
+          data = {@value.id: @value.hash_format}
+          render json: data
+        }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @value.errors, status: :unprocessable_entity }
