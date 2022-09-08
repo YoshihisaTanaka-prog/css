@@ -3,7 +3,11 @@ class Category < ApplicationRecord
     def title_ids
         ret = []
         CategoryTitle.where(category_id: self.id, is_enabled: true).each do |ct|
-            ret.push(ct.title_id)
+            if Title.find_by(id: ct.title_id)
+                ret.push(ct.title_id)
+            else
+                ct.destroy
+            end
         end
         return ret
     end
