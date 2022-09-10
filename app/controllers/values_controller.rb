@@ -56,8 +56,10 @@ class ValuesController < ApplicationController
   def update
     respond_to do |format|
       kept_original_tag_id = @value.original_tag_id
+      kept_title_id = @value.title_id
       if @value.update(value_params)
         @value.original_tag_id = kept_original_tag_id
+        @value.title_id = kept_title_id
         @value.save
         format.html { redirect_to value_url(@value), notice: "Value was successfully updated." }
         format.json {

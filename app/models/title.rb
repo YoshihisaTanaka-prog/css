@@ -35,6 +35,7 @@ class Title < ApplicationRecord
         logger.debug title_params
         self.name = title_params[:name]
         self.operation_id = title_params[:operation_id]
+        self.save
         self.set_ct ct_list
     end
 
