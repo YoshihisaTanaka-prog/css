@@ -3,8 +3,8 @@
 <h1>Titles</h1>
 
 <table>
-  <tr><th>Title</th><th>Operation</th><th colspan=2></th></tr>
-  <% @titles.each do |title| %>
+  <tr><th>Title</th><th>Operation</th><th colspan=3></th></tr>
+  <% @titles.each_with_index do |title, i| %>
     <tr>
       <td>
         <%= title.name %>
@@ -15,6 +15,11 @@
       <td>
         <%= link_to "Show", title %>
       </td>
+      <% if i % 10 == 0 %>
+        <td><%= link_to "New title", new_title_path %></td>
+      <% else %>
+        <td></td>
+      <% end %>
     </tr>
   <% end %>
 </table>

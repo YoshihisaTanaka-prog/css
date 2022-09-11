@@ -3,8 +3,11 @@
 <h1>Categories</h1>
 
 <div id="categories">
-  <% @categories.each do |category| %>
+  <% @categories.each_with_index do |category, i| %>
     <%= render category %>
+    <% if i %10 == 0 %>
+      <%= link_to "New category", new_category_path %>
+    <% end %>
     <p>
       <%= link_to "Show this category", category %>
     </p>
