@@ -4,6 +4,6 @@ class Value < ApplicationRecord
     end
 
     def hash_format
-        return {title: self.title.name, value: self.value}
+        return {title: self.title.name, title_id: self.title.id, value: self.value}
     end
 end
