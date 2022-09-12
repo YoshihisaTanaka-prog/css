@@ -13,7 +13,7 @@ class Product < ApplicationRecord
         order = []
         OriginalTag.where(product_id: self.id).order(:name).each do |original_tag|
             root_tag_hash[original_tag.id] = original_tag.hash_format
-            if original_tag.parent_if == 0
+            if original_tag.parent_id == 0
                 order = order + original_tag.order
             end
         end
