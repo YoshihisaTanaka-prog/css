@@ -11,12 +11,10 @@ class Operation < ApplicationRecord
 
     def hash_format
         units_hash = {}
-        order = []
-        self.units.each do |unit|
+        self.units.order(:name).each do |unit|
             units_hash[unit.id] = unit.hash_format
-            order.push(unit.id)
         end
-        return {name: self.name, units: units_hash, order: order}
+        return {name: self.name, units: units_hash}
     end
 
 end

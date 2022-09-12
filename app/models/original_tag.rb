@@ -5,7 +5,8 @@ class OriginalTag < ApplicationRecord
     end
 
     def values
-        return Value.where(original_tag_id: self.id)
+        values = Value.where(original_tag_id: self.id)
+        return values.sort_by{|x| x.title.name }!
     end
 
     def parent
@@ -26,10 +27,12 @@ class OriginalTag < ApplicationRecord
 
     def hash_format
         values_hash = {}
+        order = []
         self.values.each do |value|
             values_hash[value.id] = value.hash_format
+            order.push(value.id)
         end
-        return {name: self.name, parentId: self.parent_id, values: values_hash}
+        return {name: self.name, parentId: self.parent_id, values: values_hash, order: order}
     end
 
     def delete
