@@ -13,7 +13,15 @@ class OriginalTag < ApplicationRecord
     end
 
     def children
-        return OriginalTag.where(parent_id: self.id)
+        return OriginalTag.where(parent_id: self.id).order(:name)
+    end
+
+    def order
+        ret = [self.id]
+        self.children.each do |child|
+            ret = ret + child.order
+        end
+        return ret
     end
 
     def hash_format

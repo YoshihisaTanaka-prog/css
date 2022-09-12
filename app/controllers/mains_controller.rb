@@ -13,7 +13,11 @@ class MainsController < ApplicationController
             @data = {"Admin" => Admin, "Normal Tag" => NormalTag, "Operation" => Operation, "Original Tag" => OriginalTag, "Products" => Product, "Titles" => Title, "Units" => Unit, "Values" => Value}
         end
         format.json do
-            render json: {"Admin" => Admin.all.order(:id), "NormalTag" => NormalTag.all.order(:id), "Operation" => Operation.all.order(:id), "OriginalTag" => OriginalTag.all.order(:id), "Products" => Product.all.order(:id), "Titles" => Title.all.order(:id), "Units" => Unit.all.order(:id), "Values" => Value.all.order(:id)}
+            data = []
+            User.all.each do |user|
+                data.push(user.hash_format)
+            end
+            render json: data
         end
       end
     end
