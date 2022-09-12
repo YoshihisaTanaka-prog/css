@@ -6,7 +6,7 @@ class OriginalTag < ApplicationRecord
 
     def values
         values = Value.where(original_tag_id: self.id)
-        return values.sort_by{|x| x.title.name }!
+        return values.sort_by!{|x| x.title.name }
     end
 
     def parent
