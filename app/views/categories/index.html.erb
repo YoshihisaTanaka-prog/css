@@ -3,15 +3,19 @@
 <h1>Categories</h1>
 
 <div id="categories">
-  <% @categories.each_with_index do |category, i| %>
-    <%= render category %>
-    <% if i %10 == 0 %>
-      <%= link_to "New category", new_category_path %>
+  <table>
+    <% @categories.each_with_index do |category, i| %>
+      <tr>
+        <td><%= category.name %></td>
+        <td><%= link_to "Show this category", category %></td>
+        <% if i % 10 == 0 %>
+          <td><%= link_to "New category", new_category_path %></td>
+        <% else %>
+          <td></td>
+        <% end %>
+      </tr>
     <% end %>
-    <p>
-      <%= link_to "Show this category", category %>
-    </p>
-  <% end %>
+  </table>
 </div>
 
 <%= link_to "New category", new_category_path %>
