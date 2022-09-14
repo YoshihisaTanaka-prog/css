@@ -4,7 +4,7 @@ class OperationsController < ApplicationController
 
   # GET /operations or /operations.json
   def index
-    @operations = Operation.all
+    @operations = Operation.all.order(:name)
   end
 
   # GET /operations/1 or /operations/1.json
