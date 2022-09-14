@@ -15,7 +15,7 @@ class Category < ApplicationRecord
     def titles
         title_list = []
         self.title_ids.each do |title_id|
-            title_list.push( Title.find_by(id: title_id) ) if This.find_by(id: title_id)
+            title_list.push( Title.find_by(id: title_id) ) if Title.find_by(id: title_id)
         end
         return title_list.sort_by{ |x| x.name }
     end
