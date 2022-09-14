@@ -56,7 +56,7 @@ class ApplicationController < ActionController::Base
         update_data[:category] = []
         Category.all.order(:name).each do |category|
             title_ids = []
-            category.tites.each do |title|
+            category.titles.each do |title|
                 title_ids.push( title.id )
             end
             update_data[:category].push({category.name => title_ids})
