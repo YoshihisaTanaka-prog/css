@@ -1,5 +1,9 @@
 class ApplicationController < ActionController::Base
 
+    def version
+        return "1.0.0"
+    end
+
     def only_admin level
         unless admin_signed_in?
             render plain: ""
@@ -40,7 +44,7 @@ class ApplicationController < ActionController::Base
         require "google/cloud/firestore"
         credentials_hash = JSON.parse(ENV['FIREBASE_ADMIN_SDK'])
         firestore = Google::Cloud::Firestore.new(project_id: credentials_hash["project_id"], credentials: credentials_hash)
-        doc_ref = firestore.doc("CSS/cache") # 読み込み先パスを指定
+        doc_ref = firestore.doc("CSS/cache" + version) # 読み込み先パスを指定
         
         update_data = {}
         
