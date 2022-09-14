@@ -22,8 +22,11 @@
       <% end %>
     </tr>
     <tr>
-      <% title.categories.each do |category| %>
-      <% end %>
+      <td colspan="4">
+        <% title.categories.each do |category| %>
+         <%= category.name %>&nbsp;
+        <% end %>
+      </td>
     </tr>
   <% end %>
 </table>
