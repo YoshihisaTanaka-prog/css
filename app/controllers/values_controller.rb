@@ -38,6 +38,16 @@ class ValuesController < ApplicationController
     else
       respond_to do |format|
         if @value.save
+          keep = ""
+          @value.value.chars.each do|c|
+            if c == "'"
+              keep = keep + '"'
+            else
+              keep = keep + c
+            end
+          end
+          @value.value = keep
+          @value.save
           format.html { redirect_to value_url(@value), notice: "Value was successfully created." }
           format.json {
             data = {}
@@ -60,6 +70,15 @@ class ValuesController < ApplicationController
       if @value.update(value_params)
         @value.original_tag_id = kept_original_tag_id
         @value.title_id = kept_title_id
+        keep = ""
+        @value.value.chars.each do|c|
+          if c == "'"
+            keep = keep + '"'
+          else
+            keep = keep + c
+          end
+        end
+        @value.value = keep
         @value.save
         format.html { redirect_to value_url(@value), notice: "Value was successfully updated." }
         format.json {
