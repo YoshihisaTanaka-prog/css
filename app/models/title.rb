@@ -15,7 +15,7 @@ class Title < ApplicationRecord
         self.category_ids.each do |c_id|
             ret.push(Category.find_by(id: c_id)) if Category.find_by(id: c_id)
         end
-        return ret
+        return ret.sort_by{ |x| x.name }
     end
 
     def category_ids
