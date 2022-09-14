@@ -24,14 +24,28 @@ class UnitsController < ApplicationController
   def create
     logger.debug params
     @unit = Unit.new(unit_params)
-
-    respond_to do |format|
-      if @unit.save_and_set params[:operations]
-        format.html { redirect_to unit_url(@unit), notice: "Unit was successfully created." }
-        format.json { render :show, status: :created, location: @unit }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @unit.errors, status: :unprocessable_entity }
+    test = Unit.find_by(name: @unit.name)
+    operation_id_list = []
+    if test
+      operation_id_list = test.operation_id_list + params[:operations]
+      respond_to do |format|
+        if @unit.save_and_set operation_id_list
+          format.html { redirect_to unit_url(test), notice: "Unit was successfully updated." }
+          format.json { render :show, status: :created, location: test }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: test.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+        if @unit.save_and_set params[:operations]
+          format.html { redirect_to unit_url(@unit), notice: "Unit was successfully created." }
+          format.json { render :show, status: :created, location: @unit }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @unit.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
