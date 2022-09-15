@@ -39,11 +39,13 @@ class ValuesController < ApplicationController
       respond_to do |format|
         if @value.save
           keep = ""
-          @value.value.chars.each do|c|
-            if c == "'"
-              keep = keep + '"'
-            else
-              keep = keep + c
+          if @value.value
+            @value.value.chars.each do|c|
+              if c == "'"
+                keep = keep + '"'
+              else
+                keep = keep + c
+              end
             end
           end
           @value.value = keep
