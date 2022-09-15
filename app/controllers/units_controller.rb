@@ -25,11 +25,10 @@ class UnitsController < ApplicationController
     logger.debug params
     @unit = Unit.new(unit_params)
     test = Unit.find_by(name: @unit.name)
-    operation_id_list = []
     if test
       operation_id_list = test.operation_id_list + params[:operations]
       respond_to do |format|
-        if @unit.save_and_set operation_id_list
+        if test.save_and_set operation_id_list
           format.html { redirect_to unit_url(test), notice: "Unit was successfully updated." }
           format.json { render :show, status: :created, location: test }
         else
