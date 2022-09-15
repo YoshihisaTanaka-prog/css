@@ -1,7 +1,7 @@
 class ValuesController < ApplicationController
   before_action :set_value, only: %i[ show edit update destroy ]
   protect_from_forgery except: [:create, :update, :destroy]
-  before_action -> {only_admin_or_api 10}, only: [:create, :update, :destroy]
+  before_action -> {only_admin_or_api(10)}, only: [:create, :update, :destroy]
 
   # GET /values or /values.json
   def index
