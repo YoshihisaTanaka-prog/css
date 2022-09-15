@@ -2,7 +2,7 @@
 
 <h1>Operations</h1>
 
-<table>
+<table width='100%'>
     <% @operations.each_with_index do |operation, i| %>
     <tr>
       <td>
@@ -20,7 +20,7 @@
         <td></td>
       <% end %>
     </tr>
-    <tr><td colspan="4">
+    <tr><td colspan="4" style='border-bottom: 1px solid #000'>
     <% operation.units.each do |unit| %>
       &nbsp;<%= link_to unit.name, edit_unit_path(unit.id) %>
     <% end %>
