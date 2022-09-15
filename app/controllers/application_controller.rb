@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 
     def version
-        return "1.0.0"
+        return "0.1.0"
     end
 
     def only_admin level
