@@ -5,10 +5,11 @@ class ApplicationController < ActionController::Base
     end
 
     def only_admin level
-        unless admin_signed_in?
-            render plain: ""
-        end
-        if current_admin.level < level
+        if current_admin
+            if current_admin.level < level
+                render plain: ""
+            end
+        else
             render plain: ""
         end
     end
