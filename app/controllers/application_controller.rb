@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 
     def version
-        return "0.1.0"
+        return "0.2.0"
     end
 
     def only_admin level
@@ -66,11 +66,13 @@ class ApplicationController < ActionController::Base
         update_data[:titleOrder] = []
         Title.all.order(:name).each do |title|
             if title.operation
-                data = title.operation.hash_format
-                data[:titleName] = title.name
-                update_data[:titles].push({title.id => data})
+                update_data[:titles].push({title.id => title.name})
                 update_data[:titleOrder].push(title.id)
             end
+        end
+        update_data[:operation] = []
+        Operation.all.order(:name).each do |operation|
+            update_data[:operation].push({operation.id => operation.hash_format})
         end
 
         logger.debug update_data
