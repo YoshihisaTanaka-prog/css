@@ -20,4 +20,11 @@ class Product < ApplicationRecord
         return {name: self.name, tags: root_tag_hash, order: order}
     end
 
+    def delete
+        OriginalTag.where(product_id: self.id).each do |ot|
+            ot.delete
+        end
+        self.destroy
+    end
+
 end

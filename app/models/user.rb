@@ -14,4 +14,11 @@ class User < ApplicationRecord
         return {products: products_hash, userId: self.id, order: order}
     end
 
+    def delete
+        self.products.each do |product|
+            product.delete
+        end
+        self.destroy
+    end
+
 end

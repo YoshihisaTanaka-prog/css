@@ -39,6 +39,9 @@ class OriginalTag < ApplicationRecord
         self.children.each do |child|
             child.delete
         end
+        self.values.each do |value|
+            value.destroy
+        end
         self.destroy
     end
 
