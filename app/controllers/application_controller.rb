@@ -67,7 +67,7 @@ class ApplicationController < ActionController::Base
         update_data[:titleOrder] = []
         Title.all.order(:name).each do |title|
             if title.operation
-                update_data[:titles].push({title.id => {name: title.name, operation: title.operation_id})
+                update_data[:titles].push({title.id => {name: title.name, operation: title.operation_id}})
                 update_data[:titleOrder].push(title.id)
             end
         end
