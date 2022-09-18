@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
 
+  get "admin", to: "admins#index"
   get "dummy", to: "mains#dummy"
   post ":uid", to: "mains#data"
   root "mains#index"

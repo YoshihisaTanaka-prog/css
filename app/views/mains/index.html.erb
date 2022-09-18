@@ -5,7 +5,8 @@
 <%= link_to "CSSの設定タイトル", titles_path %><br>
 <%= link_to "操作方法", operations_path %><br>
 <%= link_to "単位", units_path %><br><br>
-<%= link_to "ユーザ", users_path %><br><br>
+<%= link_to "ユーザ", users_path %><br>
+<%= link_to "管理人", admin_path %><br><br>
 <% if current_admin %>
     <%= link_to "Sign Out", "/admins/sign_out", data: {
         "turbo-method": :delete
@@ -40,12 +41,14 @@ function downloadSeedsRb(){
     var outputtext = "";
     var i = 0;
     for (const key in outputData) {
-        if (i == 0) {
-            outputtext += (key + ".create(" + JSON.stringify(outputData[key]) + ")");
-        } else {
-            outputtext += ("\n" + key + ".create(" + JSON.stringify(outputData[key]) + ")");
+        for (const outputSingleData of outputData[key]) {
+            if(i == 0){
+                outputtext += (key + ".create(" + JSON.stringify(outputSingleData) + ")");
+            } else{
+                outputtext += ("\n" + key + ".create(" + JSON.stringify(outputSingleData) + ")");
+            }
+            i = 1;
         }
-        i += 1;
     }
     const blob = new Blob([outputtext], {type: "text/plain"});
     const aTag = document.createElement('a');

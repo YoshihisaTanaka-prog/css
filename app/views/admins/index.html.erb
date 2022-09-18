@@ -1,0 +1,5 @@
+<% @admins.each do |admin| %>
+    <p><%= admin.email %></p>
+<% end %>
+
+env : <%= ENV["ADMIN_MAILADDRESS"] %>
