@@ -6,7 +6,7 @@ class MainsController < ApplicationController
     def index
         respond_to do |format|
         format.html do
-            gon.data = {"Admin" => Admin.all.order(:id), "NormalTag" => NormalTag.all.order(:id), "Operation" => Operation.all.order(:id), "OriginalTag" => OriginalTag.all.order(:id), "Products" => Product.all.order(:id), "Titles" => Title.all.order(:id), "Units" => Unit.all.order(:id), "Values" => Value.all.order(:id)}
+            gon.data = {"Admin" => Admin.all.order(:id), "NormalTag" => NormalTag.all.order(:id), "Operation" => Operation.all.order(:id), "OriginalTag" => OriginalTag.all.order(:id), "Product" => Product.all.order(:id), "Title" => Title.all.order(:id), "Unit" => Unit.all.order(:id), "Value" => Value.all.order(:id)}
         end
         format.xlsx do
             response.headers['Content-Disposition'] = 'attachment; filename="cssSiteData.xlsx"'
